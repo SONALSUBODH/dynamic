@@ -13,39 +13,26 @@ variable "instance_tags" {
     Name  = "Sonal"
     Team  = "DevOps"
   }
-}
-variable "ami_id" {
-  type = string
-
-}
-
-variable "instance_type" {
-  type = string
-
-}
-
-variable "instance_tags" {
-  type = map
-
-}
-
 variable "sg_name" {
-  type = string
-
+  type  = string
+default ="tf-sg8"
  }
 
 variable "sg_description" {
   type = string
-
+default = "Allow TLS inbound traffic"
 }
 
 variable "vpc_id" {
-  type = string
-
+  type  = string
+default = "vpc-05bdcc8880aab85ab"
 }
 
 variable "sg_tags" {
   type = map
-
+default = {
+    Name  = "Allow Tls"
+    ports  = "WEBSERVER PORT"
+  }
 }
   
