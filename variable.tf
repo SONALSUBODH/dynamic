@@ -12,11 +12,12 @@ variable "instance_tags" {
   default = {
     Name  = "Sonal"
     Team  = "DevOps"
-  }
+   }
+}
 variable "sg_name" {
   type  = string
 default ="tf-sg8"
- }
+}
 
 variable "sg_description" {
   type = string
@@ -36,34 +37,23 @@ default = {
   }
 }
   locals {
-        ingress = [
-        {
-          description  = "SSH access"
-          from_port    = 22
-          to_port      = 22
-          protocol     = "tcp"
-          cidr_blocks  = ["0.0.0.0/0"]
-        },
-        {
-          description  = "HTTP"
-          from_port    = 80
-          to_port      = 80
-          protocol     = "tcp"
-          cidr_blocks  = ["0.0.0.0/0"]
-        }
-      ]
-      egress = [
-        {
-          description  = "All outbound"
-          from_port    = 0
-          to_port      = 0
-          protocol     = "-1"
-          cidr_blocks  = ["0.0.0.0/0"]
-        }
-      ]
-    }
-  }
+  ingress_rules = [
+    { description = "Allow HTTP",  from_port = 80,  to_port = 80,  protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
+    { description = "Allow HTTP",  from_port = 8080,  to_port = 8080,  protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
+    { description = "Allow HTTPS", from_port = 443, to_port = 443, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
+    { description = "Allow SSH",   from_port = 22,  to_port = 22,  protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }
+  ]
+
+  egress_rules = [
+    { description = "Outbound all", from_port = 0, to_port = 0, protocol = "-1", cidr_blocks = ["0.0.0.0/0"] }
+  ]
 }
+
+
+
+
+
+
 
 
 
